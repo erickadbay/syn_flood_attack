@@ -9,7 +9,7 @@ if len(sys.argv) < 3:
     sys.exit()
 
 target_ip = sys.argv[1]
-interval = sys.argv[2]
+interval = float(sys.argv[2])
 
 for x in range(1,10):
     network_layer = IP(dst = target_ip)
