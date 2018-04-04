@@ -13,7 +13,7 @@ interval = float(sys.argv[2])
 
 for x in range(1,10):
     network_layer = IP(dst = target_ip)
-    transport_layer = TCP(sport = randint(1025, 65535), dport=[80, 22], flags = "S")
+    transport_layer = TCP(sport = randint(1025, 65535), dport=[80], flags = "S")
 
     packet = network_layer/transport_layer
 
